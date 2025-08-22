@@ -1,0 +1,167 @@
+runtime:
+  # Источник минуток: фиксированный EST (UTC−5 без DST) → конвертируем в чистый UTC на входе
+  source_tz: "UTC-5"            # (= EST_FIXED)
+  timeframe: M5
+  force_shift_even_if_utc: false
+
+scoring:
+  # Игнорируемые по пересечению интервала окна (UTC)
+  ignore:
+    weekly_window_utc: "Fri 22:00 -> Sun 22:00"
+
+  # Политика праздников FX (UTC)
+  fx_holiday_policy:
+    mode: minimal               # core | extended | minimal | custom
+    include: [christmas, new_year, good_friday]
+    extended: false
+
+  # Доп. закрытия (UTC-интервалы "start -> end")
+  extra_closures_utc:
+    - "2001-09-11T00:00:00Z -> 2001-09-15T00:00:00Z"
+
+  # Модель скоринга (0–100)
+  weights:
+    gap_mix: 0.30
+    hotspots: 0.20
+    extremes: 0.15
+    monthly: 0.15
+    sessions: 0.10
+    calendar: 0.05
+    completeness: 0.05
+
+  targets:
+    small_share: 0.40              # desired share of <=5m gaps
+    long_share: 0.20               # upper bound share of >60m gaps
+    extreme_rate_per_10k: 0.50     # per 10k bars threshold
+    monthly_cv: 1.00               # coefficient of variation target
+    session_other: 0.10            # max acceptable share of 'Other' session
+    longest_gap_hours_ok: 24.0     # hours threshold before completeness penalty
+
+calendar:
+  source: local_csv                 # мы читаем calendar_YYYY.csv (UTC)
+  dedup_within_hour: true
+  collapse_series: true
+  importance: High
+  match_window_sec: 60              # текущее поведение — ±60s для High
+
+# ---- Ниже — параметры «на будущее» (код их не использует прямо сейчас, но хранить можно) ----
+
+min_gap_seconds: 60
+gap_buckets:
+  micro_min_sec: 120
+  micro_max_sec: 300
+  medium_min_sec: 360
+  medium_max_sec: 3600
+  large_min_sec: 3601
+
+news_window_te:
+  high:   { pre_sec: 120, post_sec: 240 }
+  medium: { pre_sec: 60,  post_sec: 120 }
+  low:    { pre_sec: 30,  post_sec: 60  }
+  precision_hour_extra_min: 15
+
+cme_ebs_defaults:
+  cme: { tz: America/Chicago }
+  ebs: { tz: Europe/London }
+  match_rule:
+    overlap_pct_threshold: 0.5
+    centerpoint_inside: true
+  repeatability_confirm_weeks: 8
+  conflict_priority:
+    tech_wins_pct: 0.7
+    high_news_early_win_sec: 60
+
+dst_timezones:
+- America/New_York
+- Europe/London
+- Europe/Zurich
+
+new_year:
+  window_utc:
+    start: 12-31 00:00
+    end: 01-01 23:59
+  weekend_median_tolerance_min: 90
+
+quality:
+  glitch_k_range: 30
+
+ingest:
+  volume_mode: auto
+
+dedup:
+  strategy: first_seen
+
+time:
+  interval_semantics: "[t,t+60s)"
+
+artifacts:
+  deterministic_gzip: true
+
+reporting:
+  hide_volume_charts_if_all_zero: true
+  analysis_ts_mode: content_max_ts
+  strict_font: true
+  language: en
+
+news_matching:
+  coarse_windows:
+    H: [30, 60]
+    M: [20, 40]
+    L: [10, 30]
+  default_hour_precision_minutes: 15
+
+warnings:
+  resampling_suspect_counter: true
+  robust_glitch_flag: true
+
+classification:
+  cascade:
+  - weekend
+  - us_holiday
+  - tech_cme_ebs
+  - news_calendar
+  - anomaly
+
+world_events:
+  enabled: false
+
+# --- PATCH: reproducibility.svg (бит-в-бит)
+reproducibility:
+  csv:
+    encoding: "utf-8"
+    line_terminator: "\n"
+    datetime_format: "%Y-%m-%d %H:%M:%S"
+    float_format: "%.5f"
+    include_index: false
+    final_newline: true
+  gzip:
+    deterministic: true
+    compresslevel: 6
+    mtime: 0
+    filename: ""
+  tar:
+    deterministic: true
+    compresslevel: 6
+    sort: lexicographic
+    uid: 0
+    gid: 0
+    uname: ""
+    gname: ""
+    mode: 420
+    mtime: 0
+  svg:
+    deterministic: true
+    hashsalt: "eurusd-v1"
+    fonttype: "none"
+    simplify: false
+    bbox_inches: null
+    strip_comments: true
+  reports:
+    include_run_timestamp: false
+    include_manifest_hash: true
+    include_inputs_block: true
+  manifest:
+    sort: path_asc
+    trailing_newline: true
+  run_id:
+    scheme: "sha256(input_csv_sha || input_txt_sha || calendar_sha || defaults_sha)"
