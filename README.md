@@ -35,8 +35,8 @@ sha256sum -c artifacts.sha256
 ---
 
 ## 📚 Related ecosystem
-- Backtest results, data‑quality policy (headline/stress), integrity materials — *insert link*  
-- Prepared aggregates/data for reproducibility — *insert link*
+- Backtest results, strategy proof, data‑quality policy (headline/stress), integrity materials — *[euro-macromechanica-results](https://github.com/rleydev/euro-macromechanica-results/tree/main)*  
+- Prepared aggregates/data for reproducibility — *[euro-macromechanica-backtest-data](https://github.com/rleydev/euro-macromechanica-backtest-data/tree/main)*
 
 ---
 
