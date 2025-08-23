@@ -47,4 +47,4 @@ sha256sum -c artifacts.sha256
 ---
 
 ## ✉️ Контакты
-GitHub: **@rleydev (thelaziestcat)** · email: **thelaziestcat@proton.me**
+GitHub: **@rleydev (thelaziestcat)** · email: **thelaziestcat@proton.me** / **thelazyazzcat@gmail.com**

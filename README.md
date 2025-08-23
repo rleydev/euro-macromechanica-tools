@@ -47,4 +47,4 @@ Any external data you use with these tools remains governed by its **original pr
 ---
 
 ## ✉️ Contact
-GitHub: **@rleydev (thelaziestcat)** · email: **thelaziestcat@proton.me**
+GitHub: **@rleydev (thelaziestcat)** · email: **thelaziestcat@proton.me** / **thelazyazzcat@gmail.com**
