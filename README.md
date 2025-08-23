@@ -12,7 +12,7 @@
   _See field layout and intent in the [`README.md`](https://github.com/rleydev/euro-macromechanica-backtest-data/tree/main/economic_calendars/README.md).
 
 - **minute data analyzer** — prepares minute series (HistData-compatible): dedup and corrupted-row cleanup, **UTC-5 (fixed) → UTC±00:00** conversion, and gap counting with emphasis on **5–10 minutes** (critical for M5 bar quality).  
-  _Explanations and analysis results are in the `README.md` of your calendars/aggregates repository —_ *insert your link*.
+  _Explanations and analysis results are in the [`README.md`](https://github.com/rleydev/euro-macromechanica-backtest-data/blob/main/analysis/README.md).
 
 > The code is intentionally lean; some details are lightly polished. It was authored to be compiled/edited in **ChatGPT‑5 (Thinking & Pro modes)** **to accelerate refinements without excessive boilerplate**. For full transparency, the entire pipeline is reproducible: follow the links above to replicate the data analysis and collection—including all noted nuances—and verify the results.
 
