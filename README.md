@@ -5,6 +5,12 @@
 
 ---
 
+## 📚 Related ecosystem
+- Backtest results, strategy proof, data‑quality policy (headline/stress), integrity materials — *[euro-macromechanica-results](https://github.com/rleydev/euro-macromechanica-results/tree/main)*  
+- Prepared aggregates/data for reproducibility — *[euro-macromechanica-backtest-data](https://github.com/rleydev/euro-macromechanica-backtest-data/tree/main)*
+
+---
+
 ## 🧭 Purpose
 **Two data-prep utilities** for backtesting and auditability:
 
@@ -31,12 +37,6 @@ sha256sum -c artifacts.sha256
 # macOS: shasum -a 256 -c artifacts.sha256
 ```
 > Note: if manifest lines contain absolute paths, hashes remain valid; when needed, create a local copy with relative filenames and verify against it.
-
----
-
-## 📚 Related ecosystem
-- Backtest results, strategy proof, data‑quality policy (headline/stress), integrity materials — *[euro-macromechanica-results](https://github.com/rleydev/euro-macromechanica-results/tree/main)*  
-- Prepared aggregates/data for reproducibility — *[euro-macromechanica-backtest-data](https://github.com/rleydev/euro-macromechanica-backtest-data/tree/main)*
 
 ---
 
