@@ -1,7 +1,6 @@
-# Euro Macromechanica — Tools  
+# Euro Macromechanica (EMM) Backtest — Tools
 *economic calendar builder & minute data analyzer (code-only)*
-
-> 🧭 This repository is part of the **Euro Macromechanica Backtest (EMM)** ecosystem.  
+ 
 > 🧭 Этот репозиторий является частью экосистемы **Euro Macromechanica Backtest (EMM)**.
 
 ---
